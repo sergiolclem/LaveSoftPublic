@@ -78,7 +78,7 @@ A página oferece uma visualização simples e rápida das informações mais im
 
 Na página, é possível visualizar:
 
-- Informações principais (nome, endereço, CPF ou CNPPJ, observações);
+- Informações principais (nome, endereço, CPF ou CNPJ, observações);
 - Informações de contato (é possível adicionar mais de um contato com email, telefone e observações);
 - Informações de faturamento/cobrança;
 - Informações sobre as últimas ordens de serviço prestadas ao cliente e peças que faltam ser entregues;
