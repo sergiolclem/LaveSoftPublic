@@ -1,0 +1,17 @@
+<h3 mat-dialog-title>Adicionar/Editar tabela de preço do cliente</h3>
+<div mat-dialog-content>
+    <form [formGroup]="formTabelaPreco">
+        <mat-form-field>
+            <mat-label>Selecione a tabela</mat-label>
+            <mat-select formControlName="nomeTabelaPreco">
+                <mat-option *ngFor="let tab of tabelasDePreco$ | async" [value]="tab">
+                    {{ tab.nomeTabela }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button (click)="alterarTabela()" [disabled]="formTabelaPreco.invalid" mat-dialog-close>Salvar</button>
+</div>

@@ -1,0 +1,79 @@
+<div class="pt-2">
+    <div class="card">
+        <div class="card-header">Detalhes do Registro</div>
+        <div class="card-body">
+            <app-loading-spinner *ngIf="loadingSpinner"></app-loading-spinner>
+            <ng-container *ngIf="detalhesCarregados && !loadingSpinner; else semInformacoes">
+                <h3 class="card-title"><b>Cliente: </b>{{ cliente.infoPrincipais.nome }}</h3>
+
+                <div class="row">
+                    <div class="col-6">
+                        <h5><b>Forma de pagamento: </b>{{ cliente.infoFaturamento.condicaoPagamento.formaPagamento }}
+                        </h5>
+                    </div>
+                    <div class="col-6">
+                        <h5><b>Condição de Faturamento:</b> {{ cliente.infoFaturamento.condicaoFaturamento }}</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="card-subtitle">
+                            <b>Prazo:</b> {{ cliente.infoFaturamento.condicaoPagamento.prazo }}</h5>
+                    </div>
+                    <div class="col-6 tipo-registro">
+                        <h5><b>Tabela de Preço:</b> {{ cliente.infoFaturamento.tabelaPreco.nome }}</h5>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="tabela-detalhes">
+                    <mat-table [dataSource]="detalhesFaturamento" class="mat-elevation-z8">
+                        <ng-container matColumnDef="numeroRegistro">
+                            <mat-header-cell *matHeaderCellDef> N° </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.numeroRegistro }} </mat-cell>
+                            <mat-footer-cell *matFooterCellDef>TOTAL</mat-footer-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="data">
+                            <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.data | timestampToDate }} </mat-cell>
+                            <mat-footer-cell *matFooterCellDef>{{ getContagem() }}</mat-footer-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="valor">
+                            <mat-header-cell *matHeaderCellDef>Valor</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ element.valor | real }} </mat-cell>
+                            <mat-footer-cell *matFooterCellDef> {{ getTotal() | real }} </mat-footer-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="foiFaturado">
+                            <mat-header-cell *matHeaderCellDef>Faturado?</mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <span *ngIf="element.foiFaturado">Sim</span>
+                                <span *ngIf="!element.foiFaturado">Não</span>
+                            </mat-cell>
+                            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="cabecalhoTabela; sticky: true"></mat-header-row>
+                        <mat-row mat-row *matRowDef="let row; columns: cabecalhoTabela;"></mat-row>
+                        <mat-footer-row *matFooterRowDef="cabecalhoTabela; sticky: true"></mat-footer-row>
+                    </mat-table>
+                </div>
+            </ng-container>
+            <ng-template #semInformacoes>
+                <h3 *ngIf="!loadingSpinner">Sem informações para exibir</h3>
+            </ng-template>
+        </div>
+        <div class="card-footer">
+            <div class="text-right">
+                <button mat-raised-button color="primary" (click)="faturar()" 
+                    [disabled]="!detalhesCarregados || loadingSpinner">
+                    Faturar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

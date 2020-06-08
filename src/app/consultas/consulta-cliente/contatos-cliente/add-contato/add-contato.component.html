@@ -1,0 +1,90 @@
+<ng-container *ngIf="cliente$ | async as cliente; else selecioneUmCliente">
+    <h2 mat-dialog-title>{{ cliente.infoPrincipais.nome }} - adicione um contato</h2>
+
+    <form [formGroup]="formContato">
+
+        <div class="row">
+            <div class="col-4">
+                <mat-list>
+                    <mat-list-item>
+                        <mat-form-field>
+                            <mat-label>Nome</mat-label>
+                            <input matInput formControlName="nome" autocomplete="off">
+                        </mat-form-field>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-form-field>
+                            <mat-label>Cargo</mat-label>
+                            <input matInput formControlName="cargo" autocomplete="off">
+                        </mat-form-field>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-form-field>
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" autocomplete="off">
+                        </mat-form-field>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+
+            <div class="col-8" formArrayName="telefones">
+                <div class="pb-2" *ngFor="let telefone of telefonesForms.controls; let i=index" [formGroupName]="i">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-form-field>
+                                        <mat-label>Telefone</mat-label>
+                                        <input matInput formControlName="numero">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field>
+                                        <mat-label>Tipo</mat-label>
+                                        <mat-select formControlName="tipo">
+                                            <mat-option value="pessoal">Pessoal</mat-option>
+                                            <mat-option value="empresa">Empresa</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-7">
+                                    <mat-form-field class="observacoes">
+                                        <mat-label>Observações</mat-label>
+                                        <input matInput formControlName="observacoes">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-2">
+                                    <button mat-raised-button (click)="addTelefone()" color="primary">
+                                        <mat-icon class="edit-icon">add</mat-icon>
+                                    </button>
+                                </div>
+                                <div class="col-2" *ngIf="telefonesForms.length > 1">
+                                    <button mat-raised-button (click)="removerTelefone(i)" color="warn">
+                                        <mat-icon class="edit-icon">remove</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <mat-form-field class="observacoes">
+                    <mat-label>Observações</mat-label>
+                    <input matInput formControlName="observacoes" autocomplete="off">
+                </mat-form-field>
+            </div>
+        </div>
+
+    </form>
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancelar</button>
+        <button mat-button mat-dialog-close (click)="addContato(cliente)">Salvar</button>
+    </mat-dialog-actions>
+</ng-container>
+<ng-template #selecioneUmCliente>SELECIONE UM CLIENTE</ng-template>

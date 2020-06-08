@@ -1,0 +1,28 @@
+<div class="pt-2">
+    <div class="card">
+        <div class="card-header">Relatório de Faturamento de Clientes</div>
+        <div class="card-body">
+            <span>
+                O relatório de faturamento é dividido em 2 partes:
+            </span>
+            <mat-list>
+                <mat-list-item>
+                    1 - Descrição de serviços prestados detalhando peças que foram processadas e data em que
+                    o serviço foi feito;
+                </mat-list-item><br>
+                <mat-list-item>
+                    2 - Apresentação da tabela de preço do cliente e custos totais dos serviços prestados.
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <div class="card-footer">
+            <div class="text-right spinner">
+                <span>
+                    <app-loading-spinner *ngIf="loadingSppiner && !relatorioPronto"></app-loading-spinner>
+                </span>
+                <button mat-raised-button color="primary" [disabled]="!relatorioPronto" (click)="gerarRelatorio()"
+                    class="mr-2">Gerar relatório</button>
+            </div>
+        </div>
+    </div>
+</div>

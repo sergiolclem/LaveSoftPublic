@@ -1,0 +1,16 @@
+.categoria-nome-cliente{
+    display: flex;
+    justify-content: space-between;
+}
+.form-nome-cliente{
+    width: 50%;
+}
+.form-cidade-cliente{
+    width: 50%;    
+}
+.form-endereco-cliente{
+    width: 80%;    
+}
+.form-observacoes-cliente{
+    width: 80%;    
+}

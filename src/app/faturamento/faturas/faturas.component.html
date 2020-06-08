@@ -1,0 +1,69 @@
+<div class="card">
+    <div class="card-body">
+        <h2>FATURAS</h2>
+        <app-loading-spinner *ngIf="spinner"></app-loading-spinner>
+        <div class="filtro-input" [hidden]="spinner">
+            <mat-form-field>
+                <mat-label>Filtros</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. muller" autocomplete="off">
+            </mat-form-field>
+        </div>
+        <mat-table [dataSource]="dadosTabFatura" [hidden]="spinner" matSort class="mat-elevation-z8 tabela">
+
+            <ng-container matColumnDef="numeroFatura">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>N° da Fatura</mat-header-cell>
+                <mat-cell *matCellDef="let element" (click)="abrirDetalhes(element.fatura)">
+                    {{ element.numeroFatura }}
+                </mat-cell>
+                <mat-footer-cell *matFooterCellDef>TOTAL</mat-footer-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="cliente">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</mat-header-cell>
+                <mat-cell *matCellDef="let element" (click)="abrirDetalhes(element.fatura)">
+                    {{ element.cliente }}
+                </mat-cell>
+                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="valorTotal">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Valor Total</mat-header-cell>
+                <mat-cell *matCellDef="let element" class="total-fatura" (click)="abrirDetalhes(element.fatura)">
+                    <span>{{ element.valorTotal | real }}</span>
+                    <span class="spacer"></span>
+                </mat-cell>
+                <mat-footer-cell *matFooterCellDef>{{ totalOrdens | real }}</mat-footer-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dataProcessamento">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Data Processamento</mat-header-cell>
+                <mat-cell *matCellDef="let element" (click)="abrirDetalhes(element.fatura)">
+                    {{ element.dataProcessamento | timestampToDate }}
+                </mat-cell>
+                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="referencia">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Referência</mat-header-cell>
+                <mat-cell *matCellDef="let element" (click)="abrirDetalhes(element.fatura)">
+                    {{ element.referencia }}
+                </mat-cell>
+                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+                <mat-cell *matCellDef="let element" class="fat-paga">
+                    <mat-slide-toggle [checked]="element.foiPaga" [disabled]="!toggleAtivo"
+                        (change)="mudarStatusPara($event.checked, element.fatura)">
+                    </mat-slide-toggle>
+                </mat-cell>
+                <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="cabecalho; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: cabecalho"></mat-row>
+            <mat-footer-row *matFooterRowDef="cabecalho; sticky: true"></mat-footer-row>
+        </mat-table>
+    </div>
+</div>

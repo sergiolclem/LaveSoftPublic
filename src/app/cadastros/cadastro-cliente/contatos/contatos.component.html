@@ -1,0 +1,77 @@
+<form [formGroup]="cadClienteForm.cadastroDeClienteForm">
+    <div class="card">
+        <div class="card-header">Cadastrar Contatos</div>
+        <div class="card-body">
+            <div formArrayName="contatos">
+                <div *ngFor="let contato of cadClienteForm.contatosFormArray.controls; let i=index"
+                    [formGroupName]="i">
+                    
+                    <div class="nome-cargo">
+                        <mat-form-field class="nome">
+                            <mat-label>Nome do Contato</mat-label>
+                            <input matInput formControlName="nome" autocomplete="off">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Cargo do Contato</mat-label>
+                            <input matInput formControlName="cargo" autocomplete="off">
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field class="email">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" autocomplete="off">
+                    </mat-form-field>
+
+                    <div formArrayName="telefones">
+                        <div class="pb-2" *ngFor="let telefone of cadClienteForm.getTelefonesFormArray(contato).controls; let j=index" [formGroupName]="j">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <mat-form-field>
+                                                <mat-label>Telefone</mat-label>
+                                                <input appTelefone matInput formControlName="numero" 
+                                                    placeholder="DD X XXXX XXXX"
+                                                    autocomplete="off">
+                                            <mat-error>
+                                                Número de telefone inválido
+                                            </mat-error>    
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-6">
+                                            <mat-form-field>
+                                                <mat-label>Tipo</mat-label>
+                                                <mat-select formControlName="tipo">
+                                                    <mat-option value="pessoal">Pessoal</mat-option>
+                                                    <mat-option value="empresa">Empresa</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <mat-form-field class="observacoes">
+                                                <mat-label>Observações</mat-label>
+                                                <input matInput formControlName="observacoes">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-2">
+                                            <button mat-raised-button (click)="cadClienteForm.addTelefone(contato)" color="primary">
+                                                <mat-icon class="edit-icon">add</mat-icon>
+                                            </button>
+                                        </div>
+                                        <div class="col-2" *ngIf="cadClienteForm.getTelefonesFormArray(contato).length > 1">
+                                            <button mat-raised-button (click)="cadClienteForm.removerTelefone(contato, j)" color="warn">
+                                                <mat-icon class="edit-icon">remove</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

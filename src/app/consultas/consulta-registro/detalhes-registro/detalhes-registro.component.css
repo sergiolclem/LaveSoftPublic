@@ -1,0 +1,9 @@
+.item-nome{
+    width: 70%;
+}
+.item-quantidade{
+    width: 30%;
+}
+.tipo-registro{
+    text-transform: capitalize;
+}

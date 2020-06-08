@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Registro número: {{ data.metaDados.numeroRegistro }}</h2>
+<mat-dialog-content>
+    <h3 matLine>Cliente: {{ data.cabecalho.cliente }}</h3>
+    <p matLine>
+        Data da {{ data.metaDados.tipoRegistro }}: {{ data.cabecalho.data }}
+    </p>
+    <p matLine>
+        <span>Tipo do Registro: </span>
+        <span class="demo-2">{{ data.metaDados.tipoRegistro }}</span>
+    </p>
+    <p matLine>
+        <span>Usuário: </span>
+        <span class="demo-2">{{ data.metaDados.usuario }}</span>
+    </p>
+    <hr>
+    <mat-nav-list>
+        <h3 matSubheader>Itens do Registro</h3>
+        <mat-list-item *ngFor="let peca of data.detalhes.pecas">
+            <span class="chave">{{ peca.nome }}</span>
+            <span class="valor">{{ peca.quantidade }}</span>
+        </mat-list-item>
+    </mat-nav-list>
+    <ng-container *ngIf="data.detalhes.observacoes.length">
+        <hr>
+        <mat-nav-list>
+            <h3 matSubheader>Observações</h3>
+            <mat-list-item *ngFor="let obs of data.detalhes.observacoes">
+                {{ obs }}    
+            </mat-list-item>
+        </mat-nav-list>
+    </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial>Fechar</button>
+</mat-dialog-actions>

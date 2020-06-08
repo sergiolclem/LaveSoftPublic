@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-header">Detalhes do Registro</div>
+    <div class="card-body" *ngIf="registro; else selecioneUmRegistro">
+        <h3 class="card-title"><b>Cliente:</b> {{ registro.cabecalho.cliente }}</h3>
+
+        <div class="row">
+            <div class="col-6">
+                <h5><b>Número do Registro: </b> {{ registro.metaDados.numeroRegistro }}</h5>
+            </div>
+            <div class="col-6">
+                <h5><b>Usuário:</b> {{ registro.metaDados.usuario }}</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <h5 class="card-subtitle">
+                    <b>Data de {{ registro.metaDados.tipoRegistro }}:</b> {{ registro.cabecalho.data | timestampToDate }}</h5> 
+            </div>
+            <div class="col-6 tipo-registro">
+                <h5><b>Tipo de Registro:</b> {{ registro.metaDados.tipoRegistro }}</h5>
+            </div>
+        </div>
+        
+        <hr>
+
+        <mat-list>
+            <mat-list-item *ngFor="let peca of registro.detalhes.pecas" role="listitem">
+                <mat-label class="item-nome">{{ peca.nome }}</mat-label>
+                <mat-label class="item-quantidade">{{ peca.quantidade }}</mat-label>
+            </mat-list-item>
+        </mat-list>
+
+        <ng-container *ngIf="registro.detalhes.observacoes.length">
+            <hr>
+            <mat-list>
+                <mat-list-item *ngFor="let obs of registro.detalhes.observacoes" role="listitem">
+                    {{ obs }}
+                </mat-list-item>
+            </mat-list>
+        </ng-container>
+
+    </div>
+    <ng-template #selecioneUmRegistro>
+        <div class="card-body">
+            <h3>Selecione um registro</h3>
+        </div>
+    </ng-template>
+</div>

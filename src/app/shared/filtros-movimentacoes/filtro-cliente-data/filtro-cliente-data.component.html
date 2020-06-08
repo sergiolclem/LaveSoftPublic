@@ -1,0 +1,40 @@
+<div class="card" [formGroup]="formData">
+  <div class="card-header">FILTROS</div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-5">
+        <app-loading-spinner *ngIf="!clientesCarregados"></app-loading-spinner>
+        <mat-form-field class="filtro-label" *ngIf="clientesCarregados">
+          <mat-label>Cliente</mat-label>
+          <mat-select formControlName="cliente">
+            <mat-option [value]="cliente.metaDados.id" *ngFor="let cliente of clientes">
+              {{ cliente.infoPrincipais.nome }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-radio-group formControlName="tipoRegistro" class="radio pt-5">
+          <mat-radio-button value="entrada">Entrada</mat-radio-button>
+          <mat-radio-button value="saida">Saída</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="col-sm-5">
+        <mat-form-field class="filtro-label">
+          <mat-label class="col-form-label">Data Inicial</mat-label>
+          <input matInput [matDatepicker]="inicial" formControlName="dataInicial">
+          <mat-datepicker-toggle matSuffix [for]="inicial"></mat-datepicker-toggle>
+          <mat-datepicker #inicial></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="filtro-label">
+          <mat-label class="col-form-label">Data Final</mat-label>
+          <input matInput [matDatepicker]="final" formControlName="dataFinal">
+          <mat-datepicker-toggle matSuffix [for]="final"></mat-datepicker-toggle>
+          <mat-datepicker #final></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="cols-sm-2">
+        <button mat-raised-button color="warn" (click)="limparFiltros()" class="mb-4">
+          <mat-icon>clear</mat-icon> Limpar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

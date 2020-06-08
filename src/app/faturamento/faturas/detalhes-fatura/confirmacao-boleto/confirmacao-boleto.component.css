@@ -1,0 +1,46 @@
+.gerencia-button:hover{
+    background: rgb(242,101,34);
+    color: rgb(255,255,255, 1);
+    text-decoration: none;
+}
+.gerencia-button{
+    background: rgb(242,101,34, 0.9);
+    color: rgb(255,255,255);
+}
+.descricao{
+    width: 80%;
+}
+.info-nome{
+    flex-grow: 1;
+}
+.info-cliente-field{
+    margin-left: 20px;
+}
+.valor-servico{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 40px;
+}
+.grupo-toggle{
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+.grupo-toggle-cob-add{
+    margin-left: 20px;
+    flex-grow: 1;
+}
+.grupo-toggle-desc{
+    margin-left: 20px;
+}
+.gerar-boleto-btn{
+    background: rgb(242,101,34, 0.9);
+    color: rgb(255,255,255);
+}
+.spinner{
+    display: flex;
+    justify-content: space-between;
+}
+.cancelar-btn{
+    margin-right: 5px;
+}

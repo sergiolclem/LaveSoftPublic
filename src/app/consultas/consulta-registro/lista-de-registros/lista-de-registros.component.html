@@ -1,0 +1,34 @@
+<div class="card">
+    <div class="card-header cabecalho-lista">
+        <div class="row text-muted cabecalho-lista">
+            <mat-label class="col-3">N° Registro</mat-label>
+            <mat-label class="col-4">Cliente</mat-label>
+            <mat-label class="col-3">Data</mat-label>
+            <mat-label class="col-2 tipo-registro">Tipo</mat-label>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="spinner-lista" *ngIf="!listaRegCarregada">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <ng-container *ngIf="registros?.length; else semRegistros">
+            <mat-nav-list *ngIf="listaRegCarregada">
+                <a (click)="definirID(registro)"
+                    mat-list-item  
+                    *ngFor="let registro of registros">
+                    <div class="row">
+                        <mat-label class="col-3">{{ registro.metaDados.numeroRegistro }}</mat-label>
+                        <mat-label class="col-4">{{ registro.cabecalho.cliente }}</mat-label>
+                        <mat-label class="col-3">{{ registro.cabecalho.data | timestampToDate }}</mat-label>
+                        <mat-label class="col-2 tipo-registro">{{ registro.metaDados.tipoRegistro }}</mat-label>
+                    </div>
+                </a>
+            </mat-nav-list>
+        </ng-container>
+        <ng-template #semRegistros>
+            <div class="sem-registros" *ngIf="listaRegCarregada">
+                <h3>Sem Registros para o filtro selecionado</h3>
+            </div>
+        </ng-template>
+    </div>
+</div>

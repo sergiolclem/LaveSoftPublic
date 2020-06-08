@@ -1,0 +1,50 @@
+.chave{
+    width: 70%;
+}
+.valor{
+    width: 30%;
+}
+.detalhes-fatura{
+    display: flex;
+    justify-content: space-between;
+}
+.more-vert-button:focus{
+    outline: none;
+}
+.more-button:focus{
+    outline: none;
+}
+.more-button{
+    margin-right: 70px;
+}
+.more-button-icon{
+    font-size: 35px;
+}
+.gerar-boleto-btn:hover{
+    background: rgb(242,101,34);
+    color: rgb(255,255,255, 1);
+    text-decoration: none;
+}
+.gerar-boleto-btn:focus{
+    outline: none;
+}
+.gerar-boleto-btn{
+    background: rgb(242,101,34, 0.9);
+    color: rgb(255,255,255);
+}
+.cob-paga{
+    padding-left: 15px;
+}
+.spinner{
+    display: flex;
+}
+.observacao{
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(242, 100, 34, 0.2);
+    border-radius: 5px;
+    margin-bottom: 3px;
+}
+.mat-column-id, .mat-column-cobrancaVencida, .mat-column-vencimento{
+    flex-grow: 0.5;
+}

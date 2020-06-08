@@ -1,0 +1,65 @@
+<form [formGroup]="cadClienteForm.cadastroDeClienteForm">
+    <div class="card">
+        <div class="card-header">Cadastrar Informações Principais</div>
+        <div class="card-body">
+            <div class="categoria-nome-cliente">
+                <mat-form-field class="form-categoria-cliente">
+                    <mat-label>Categoria</mat-label>
+                    <mat-select formControlName="categoria">
+                        <mat-option value="hotel">Hotel</mat-option>
+                        <mat-option value="pousada">Pousada</mat-option>
+                        <mat-option value="restaurante">Restaurante</mat-option>
+                        <mat-option value="outros">Outros</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="form-nome-cliente">
+                    <mat-label>Nome do Cliente</mat-label>
+                    <input matInput formControlName="nome" autocomplete="off">
+                    <mat-error *ngIf="cadClienteForm.cadastroDeClienteForm.get('nome').hasError('required')">
+                        Campo obrigatório
+                    </mat-error>
+                    <mat-error *ngIf="cadClienteForm.cadastroDeClienteForm.get('nome').hasError('minlength')">
+                        Campo deve conter, pelo menos, 3 caracteres
+                    </mat-error>
+                </mat-form-field><br>
+            </div>
+
+            <mat-form-field class="form-cidade-cliente">
+                <mat-label>Cidade</mat-label>
+                <input matInput formControlName="cidade" autocomplete="off">
+                <mat-error *ngIf="cadClienteForm.cadastroDeClienteForm.get('cidade').hasError('required')">
+                    Campo obrigatório
+                </mat-error>
+                <mat-error *ngIf="cadClienteForm.cadastroDeClienteForm.get('cidade').hasError('minlength')">
+                    Campo deve conter, pelo menos, 5 caracteres
+                </mat-error>
+            </mat-form-field><br>
+
+            <mat-form-field class="form-endereco-cliente">
+                <mat-label>Endereço</mat-label>
+                <input matInput formControlName="endereco" autocomplete="off">
+            </mat-form-field><br>
+
+            <mat-form-field class="form-cpfOuCnpj-cliente">
+                <mat-label>CPF/CNPJ</mat-label>
+                <input matInput appCpfOuCnpj formControlName="cpfOuCnpj" autocomplete="off">
+                <mat-error *ngIf="cadClienteForm.cadastroDeClienteForm.get('cpfOuCnpj').hasError('cpfOuCnpjInvalido')">
+                    CPF ou CNPJ digitado não é válido
+                </mat-error>
+                <mat-error *ngIf="cadClienteForm.cadastroDeClienteForm.get('cpfOuCnpj').hasError('cpfInvalido')">
+                    CPF digitado não é válido
+                </mat-error>
+                <mat-error *ngIf="cadClienteForm.cadastroDeClienteForm.get('cpfOuCnpj').hasError('cnpjInvalido')">
+                    CNPJ digitado não é válido
+                </mat-error>
+            </mat-form-field><br>
+
+            <mat-form-field class="form-observacoes-cliente">
+                <mat-label>Observações</mat-label>
+                <textarea matInput formControlName="observacoes" autocomplete="off"></textarea>
+            </mat-form-field>
+
+        </div>
+    </div>
+</form>

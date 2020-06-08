@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="card-header">INFORMAÇÕES DE PROCESSO</div>
+    <div class="card-body">
+        <ng-container *ngIf="infoProcesso$ | async as info; else selecioneOCliente">
+            <mat-nav-list>
+                <h3 matSubheader>Saldo de Peças</h3>
+                <ng-container *ngFor="let peca of info.saldo">
+                    <mat-list-item *ngIf="peca.quantidade">
+                        <span class="chave">{{ peca.nome }}</span>
+                        <span class="valor">{{ peca.quantidade }}</span>
+                    </mat-list-item>
+                </ng-container>
+            </mat-nav-list>
+
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <ng-container *ngIf="ultEntradas$ | async as regs">
+                        <mat-nav-list *ngIf="regs.length; else clienteSemRegistros">
+                            <h3 matSubheader>Últimas Entradas</h3>
+                            <a mat-list-item *ngFor="let reg of regs" (click)="detalharRegistro(reg)">
+                                <span class="chave">{{ reg.metaDados.numeroRegistro }}</span>
+                                <span class="valor">{{ reg.cabecalho.data | timestampToDate }}</span>
+                            </a>
+                        </mat-nav-list>
+                        <ng-template #clienteSemRegistros>CLIENTE NÃO POSSUI REGISTROS</ng-template>
+                    </ng-container>
+                </div>
+                <div class="col-6">
+                    <ng-container *ngIf="ultSaidas$ | async as regs">
+                        <mat-nav-list *ngIf="regs.length; else clienteSemRegistros">
+                            <h3 matSubheader>Últimas Saídas</h3>
+                            <a mat-list-item *ngFor="let reg of regs" (click)="detalharRegistro(reg)">
+                                <span class="chave">{{ reg.metaDados.numeroRegistro }}</span>
+                                <span class="valor">{{ reg.cabecalho.data | timestampToDate }}</span>
+                            </a>
+                        </mat-nav-list>
+                        <ng-template #clienteSemRegistros>CLIENTE NÃO POSSUI REGISTROS</ng-template>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+        <ng-template #selecioneOCliente>SELECIONE UM CLIENTE</ng-template>
+    </div>
+</div>

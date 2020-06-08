@@ -1,0 +1,117 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "movimentacao-peca",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cabecalho.clienteId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cabecalho.data",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "movimentacao-peca",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cabecalho.clienteId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cabecalho.dataEntrada",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "movimentacao-peca",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cabecalho.clienteId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cabecalho.dataEntrada",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "movimentacao-peca",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cabecalho.clienteId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "metaDados.numeroRegistro",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "movimentacao-peca",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "cabecalho.clienteId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "metaDados.numeroRegistro",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "movimentacao-peca",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "metaDados.tipoRegistro",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "cabecalho.data",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "movimentacao-peca",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "metaDados.tipoRegistro",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "metaDados.numeroRegistro",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "movimentacao-peca",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "metaDados.tipoRegistro",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "metaDados.numeroRegistro",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

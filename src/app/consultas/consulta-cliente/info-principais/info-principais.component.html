@@ -1,0 +1,42 @@
+<div class="card">
+    <div class="card-header cabecalho-flex">
+        <span>INFORMAÇÕES PRINCIPAIS</span>
+        <span class="example-spacer"></span>
+        <mat-icon (click)="editarInfo()" class="edit-icon">edit</mat-icon>
+    </div>
+
+    <div class="card-body">
+        <div *ngIf="infoPrincipais$ | async as info; else selecioneOCliente">
+            <mat-list>
+                <mat-list-item>
+                    <span class="chave">Nome: </span>
+                    <span class="valor">{{ info.nome }}</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span class="chave">Categoria: </span>
+                    <span class="valor">{{ info.categoria }}</span>
+                </mat-list-item>
+                <mat-list-item *ngIf="info.cidade">
+                    <span class="chave">Cidade: </span>
+                    <span class="valor">{{ info.cidade }}</span>
+                </mat-list-item>
+                <mat-divider *ngIf="info.endereco || info.cpfOuCnpj || info.observacoes"></mat-divider>
+                <mat-list-item *ngIf="info.endereco">
+                    <span class="chave">Endereço: </span>
+                    <span class="valor">{{ info.endereco }}</span>
+                </mat-list-item>
+                <mat-list-item *ngIf="info.cpfOuCnpj">
+                    <span class="chave">CPF/CNPJ: </span>
+                    <span class="valor">{{ info.cpfOuCnpj }}</span>
+                </mat-list-item>
+                <mat-list-item *ngIf="info.observacoes">
+                    <span class="chave">Observações: </span>
+                    <span>{{ info.observacoes }}</span>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <ng-template #selecioneOCliente>
+            SELECIONE UM CLIENTE
+        </ng-template>
+    </div>
+</div>

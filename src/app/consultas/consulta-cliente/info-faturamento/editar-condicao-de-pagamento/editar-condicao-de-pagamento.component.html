@@ -1,0 +1,21 @@
+<h3 mat-dialog-title>Adicionar/Editar condições de pagamento do cliente</h3>
+<div mat-dialog-content>
+    <form [formGroup]="condPagForm">
+        <mat-form-field class="cond-pag">
+            <mat-label>Selecione a forma de pagamento</mat-label>
+            <mat-select formControlName="formaPagamento">
+                <mat-option value="boleto">Boleto</mat-option>
+                <mat-option value="transferencia">Transferência</mat-option>
+                <mat-option value="Dinheiro ou Cheque">Dinheiro ou Cheque</mat-option>
+            </mat-select>
+        </mat-form-field><br>
+        <mat-form-field class="cond-pag">
+            <mat-label>Digite o prazo de pagamento</mat-label>
+            <input matInput formControlName="prazoPagamento" autocomplete="off">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button (click)="salvarCondPagamento()" [disabled]="condPagForm.invalid" mat-dialog-close>Salvar</button>
+</div>

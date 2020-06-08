@@ -1,0 +1,13 @@
+.botoes{
+    display: flex;
+    justify-content: flex-end;
+}
+.botao-cadastrar{
+    background-color: #23CF5C;
+    color: white;
+}
+.botao-limpar{
+    background-color: #D12C38 ;
+    color: white;
+    margin-right: 4px;
+}

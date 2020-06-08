@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-header cabecalho-flex">
+        <span>INFORMAÇÕES DE CONTATO</span>
+        <span class="example-spacer"></span>
+        <mat-icon (click)="addContato()" class="edit-icon">edit</mat-icon>
+    </div>
+    <div class="card-body">
+        <div *ngIf="contatos$ | async as contatos; else selecioneOCliente">
+            <ng-container *ngIf="contatos.length; else clienteSemContatos">
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let contato of contatos">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              {{ contato.nome }}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                              {{ contato.cargo }}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-nav-list>
+                            <h3 matSubheader *ngIf="contato.email">{{ contato.email }}</h3>
+                            <mat-list-item *ngFor="let tel of contato.telefones">
+                                <h3 matLine> {{ tel.tipo }} </h3>
+                                <p matLine> {{ tel.numero }} </p>
+                                <p matLine *ngIf="tel.observacoes"> {{ tel.observacoes }} </p>
+                            </mat-list-item>
+                        </mat-nav-list>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </ng-container>
+            <ng-template #clienteSemContatos>
+                <span>Cliente não possui contatos</span>
+            </ng-template>
+        </div>
+        <ng-template #selecioneOCliente>SELECIONE UM CLIENTE</ng-template>
+    </div>
+</div>

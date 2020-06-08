@@ -1,0 +1,43 @@
+<div class="menu-flex">
+    <mat-menu #processIntel="matMenu">
+        <button mat-menu-item routerLink="/pi/saldo-pecas">Saldo de Peças</button>
+        <button mat-menu-item routerLink="/pi/servico-cliente">Serviço por Cliente</button>
+        <!-- <button mat-menu-item routerLink="/pi/custos-de-producao">Custos de Produção</button> -->
+    </mat-menu>
+    
+    <mat-menu #faturamento="matMenu">
+        <button mat-menu-item routerLink="/faturamento/relatorio-faturamento">Relatório de Faturamento</button>
+        <button mat-menu-item routerLink="/faturamento/faturas">Faturas</button>
+    </mat-menu>
+    
+    <mat-menu #cadastros="matMenu">
+        <button mat-menu-item routerLink="/cadastros/cadastro-cliente">Clientes</button>
+        <button mat-menu-item routerLink="/cadastros/cadastro-peca">Peças</button>
+        <button mat-menu-item routerLink="/cadastros/cadastro-tabela-de-preco">Tabelas de Preços</button>
+    </mat-menu>
+    
+    <mat-menu #consultas="matMenu">
+        <button mat-menu-item routerLink="/consultas/consulta-registro">Registros</button>
+        <button mat-menu-item routerLink="/consultas/consulta-cliente">Clientes</button>
+        <button mat-menu-item routerLink="/consultas/consulta-tabela-de-preco">Tabelas de Preços</button>
+        <!-- <button mat-menu-item routerLink="/consultas/cadastro-peca">Peças</button> -->
+    </mat-menu>
+    
+    <button mat-flat-button [matMenuTriggerFor]="processIntel">Process Intelligence - &#960;</button>
+    <button mat-flat-button [matMenuTriggerFor]="faturamento">Faturamento</button>
+    <button mat-flat-button [matMenuTriggerFor]="cadastros">Cadastros</button>
+    <button mat-flat-button [matMenuTriggerFor]="consultas">Consultas</button>
+    
+    <span class="spacer"></span>
+
+    <mat-menu #usuario="matMenu">
+        <button mat-menu-item (click)="sair()">Sair</button>
+    </mat-menu>
+    
+    <button mat-button [matMenuTriggerFor]="usuario" *ngIf="estaLogado; else logar" color="primary">
+        <ng-container *ngIf="usuario$ | async as usuario">{{ usuario.displayName }}</ng-container>
+    </button>
+    <ng-template #logar>
+        <button mat-button color="primary" routerLink="login">Logar</button>
+    </ng-template>
+</div>

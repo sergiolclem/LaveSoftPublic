@@ -1,0 +1,106 @@
+<div class="spinner">
+    <h2 mat-dialog-title>Confirmar Geração de Boleto</h2>
+    <app-loading-spinner *ngIf="spinner"></app-loading-spinner>
+    <button mat-icon-button mat-dialog-close color="warn">
+        <mat-icon>delete</mat-icon>
+    </button>
+</div>
+<mat-dialog-content>
+    <h3 matLine>Atenção: o boleto será emitido por intermédio da Gerencianet!</h3>
+    <a mat-button href="https://sistema.gerencianet.com.br/cobrancas/visao-geral" target="_blank"
+        class="gerencia-button">Acompanhar Transações</a>
+    <hr>
+
+    <div class="valor-servico">
+        <h3>Valor do Serviço: {{ valorTotal | real }} </h3>
+    </div>
+
+    <form [formGroup]="formBoleto">
+        <div class="info-cliente">
+            <mat-form-field class="info-nome">
+                <mat-label>Nome Cliente</mat-label>
+                <input matInput formControlName="nome" autocomplete="off" cdkFocusInitial>
+            </mat-form-field>
+
+            <mat-form-field class="info-cliente-field">
+                <mat-label>CPF ou CNPJ</mat-label>
+                <input matInput appCpfOuCnpj formControlName="cpfOuCnpj" autocomplete="off">
+                <mat-error *ngIf="formBoleto.get('cpfOuCnpj').hasError('required')">
+                    Digite um CPF ou CNPJ válido
+                </mat-error>
+                <mat-error *ngIf="formBoleto.get('cpfOuCnpj').hasError('cpfOuCnpjInvalido')">
+                    CPF ou CNPJ digitado não é válido
+                </mat-error>
+                <mat-error *ngIf="formBoleto.get('cpfOuCnpj').hasError('cpfInvalido')">
+                    CPF digitado não é válido
+                </mat-error>
+                <mat-error *ngIf="formBoleto.get('cpfOuCnpj').hasError('cnpjInvalido')">
+                    CNPJ digitado não é válido
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="info-cliente-field">
+                <mat-label>Telefone</mat-label>
+                <input matInput appTelefone formControlName="telefone" autocomplete="off">
+                <mat-error>Número de telefone inválido</mat-error>
+            </mat-form-field>
+        </div>
+        <mat-form-field class="filtro-label">
+            <mat-label class="col-form-label">Vencimento</mat-label>
+            <input matInput [matDatepicker]="inicial" formControlName="vencimento">
+            <mat-datepicker-toggle matSuffix [for]="inicial"></mat-datepicker-toggle>
+            <mat-datepicker #inicial></mat-datepicker>
+            <mat-error>Data deve ser posterior à hoje</mat-error>
+        </mat-form-field>
+        <hr>
+
+        <div class="grupo-toggle">
+            <mat-slide-toggle (change)="cobrancaAddToggle($event.checked)"></mat-slide-toggle>
+            <mat-form-field class="grupo-toggle-cob-add">
+                <mat-label>Cobrança adicional</mat-label>
+                <input matInput placeholder="12kg de roupas domiciliares" formControlName="descricaoCobrancaAdicional"
+                    autocomplete="off">
+            </mat-form-field>
+
+            <mat-form-field class="grupo-toggle-cob-add">
+                <mat-label>Valor adicional</mat-label>
+                <input matInput appReal placeholder="R$ 235,25" formControlName="valorCobrancaAdicional"
+                    autocomplete="off">
+            </mat-form-field>
+        </div>
+
+        <div class="grupo-toggle">
+            <mat-slide-toggle (change)="descontoToggle($event.checked)"></mat-slide-toggle>
+
+            <mat-form-field class="grupo-toggle-desc">
+                <mat-label>Valor Desconto</mat-label>
+                <input matInput appReal placeholder="R$ 15,25" formControlName="valorDesconto" autocomplete="off">
+            </mat-form-field>
+        </div>
+
+        <div class="grupo-toggle">
+            <mat-slide-toggle (change)="multaToggle($event.checked)"></mat-slide-toggle>
+
+            <mat-form-field class="grupo-toggle-desc">
+                <mat-label>Multa</mat-label>
+                <input matInput type="number" placeholder="máx 10%" formControlName="multa" autocomplete="off">
+                <mat-error>min: 0 - máx: 10</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="grupo-toggle">
+            <mat-slide-toggle (change)="jurosToggle($event.checked)"></mat-slide-toggle>
+
+            <mat-form-field class="grupo-toggle-desc">
+                <mat-label>Juros/Dia</mat-label>
+                <input matInput placeholder="máx 0.33%" type="number" formControlName="juros" autocomplete="off">
+                <mat-error>min: 0 - máx: 0.33</mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="gerarBoleto()" [disabled]="formBoleto.invalid || spinner" class="gerar-boleto-btn">Gerar
+        Boleto<mat-icon>request_quote</mat-icon></button>
+</mat-dialog-actions>

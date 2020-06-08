@@ -1,0 +1,5 @@
+.spinner-cliente{
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 30px 16px 30px;
+}

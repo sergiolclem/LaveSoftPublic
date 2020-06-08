@@ -1,0 +1,16 @@
+.filtro-input{
+    display: flex;
+    justify-content: flex-end;
+}
+.mat-row:nth-child(odd){
+    background-color: #F2F2F2;
+}
+.total-fatura{
+    justify-content: flex-end;
+}
+.spacer{
+    width: 50%;
+}
+.fat-paga{
+    padding-left: 15px;
+}

@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-6">
+        <app-info-principais></app-info-principais>
+        <app-info-faturamento></app-info-faturamento>
+    </div>
+    <div class="col-6">
+        <app-contatos></app-contatos>
+    </div>
+</div>
+<hr>
+<div class="botoes">
+    <button mat-raised-button class="botao-limpar" (click)="limparForm()">Limpar Formulário</button>
+    <button mat-raised-button class="botao-cadastrar" (click)="cadastrarCliente()"
+        [disabled]="cadClienteForm.cadastroDeClienteForm.invalid">
+        Cadastrar Cliente
+    </button>
+</div>

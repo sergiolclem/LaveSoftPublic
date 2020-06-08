@@ -1,0 +1,38 @@
+<form [formGroup]="cadClienteForm.cadastroDeClienteForm">
+    <div class="card mt-2">
+        <div class="card-header">Cadastrar Informações de Faturamento</div>
+        <div class="card-body">
+            <div class="spinner-tabela" *ngIf="!tabsCarregadas">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
+            <mat-form-field *ngIf="tabsCarregadas" class="tabela">
+                <mat-label>Tabela de Preço</mat-label>
+                <mat-select formControlName="tabelaDePreco">
+                    <mat-option *ngFor="let tabela of tabelas" [value]="tabela">{{ tabela.nomeTabela }}</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+
+            <mat-form-field class="forma">
+                <mat-label>Selecione a forma de pagamento</mat-label>
+                <mat-select formControlName="formaPagamento">
+                    <mat-option value="boleto">Boleto</mat-option>
+                    <mat-option value="transferencia">Transferência</mat-option>
+                    <mat-option value="Dinheiro ou Cheque">Dinheiro ou Cheque</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+
+            <mat-form-field class="prazo">
+                <mat-label>Digite o prazo de pagamento</mat-label>
+                <input matInput formControlName="prazo" autocomplete="off">
+            </mat-form-field><hr>
+
+            <mat-form-field class="prazo">
+                <mat-label>Condição de Faturamento</mat-label>
+                <mat-select formControlName="condicaoFaturamento">
+                    <mat-option value="entrada">Entrada</mat-option>
+                    <mat-option value="saida">Saída</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+</form>

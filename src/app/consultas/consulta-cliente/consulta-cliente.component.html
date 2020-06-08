@@ -1,0 +1,32 @@
+<div class="row pt-2">
+    <div class="col-6">
+        <form [formGroup]="formService.formCliente">
+            <div class="spinner-cliente" *ngIf="!listaClientesCarregada">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
+            <mat-form-field *ngIf="listaClientesCarregada">
+                <mat-label>Selecione o Cliente</mat-label>
+                <mat-select 
+                    formControlName="nomeCliente"
+                    (selectionChange)="selecionarCliente()">
+                    <mat-option 
+                        *ngFor="let cliente of clientes"
+                        [value]="cliente">
+                            {{ cliente.infoPrincipais.nome }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <div><app-info-principais></app-info-principais></div>
+        <div class="pt-2"><app-contatos-cliente></app-contatos-cliente></div>
+        <div class="pt-2"><app-info-faturamento></app-info-faturamento></div>
+    </div>
+    <div class="col-6">
+        <app-info-processo></app-info-processo>
+    </div>
+</div>

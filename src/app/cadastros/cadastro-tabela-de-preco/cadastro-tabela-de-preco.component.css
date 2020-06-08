@@ -1,0 +1,31 @@
+.nome-tabela{
+    font-size: xx-large;
+    width: 350px;
+    margin-left: 30px;
+}
+.peca-tabela{
+    width: 350px;
+}
+.botoes{
+    display: flex;
+    justify-content: flex-end;
+}
+.botao-cadastrar{
+    background-color: #23CF5C;
+    color: white;
+}
+.titulo-padrao{
+    font-size: xx-large;
+    margin: 50px 20px;
+}
+.lista-padrao{
+    margin-top: 80px;   
+}
+.peca-tab-padrao{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.list-item-padrao:nth-child(odd) {
+    background-color: #F2F2F2;
+}

@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-header">INFORMAÇÕES DE FATURAMENTO</div>
+    <div class="card-body">
+        <mat-nav-list *ngIf="infoFaturamento; else selecioneOCliente">
+            <mat-list-item (click)="editarTabela()">
+                <h3 matLine>Tabela de Preço </h3>
+                <p matLine>
+                    <span>Nome: </span>
+                    <span class="demo-2">{{ infoFaturamento.tabelaPreco.nome }}</span>
+                </p>
+                <p matLine>
+                    <span>Última Alteração: </span>
+                    <span class="demo-2">{{ infoFaturamento.tabelaPreco.dataAlteracao | timestampToDate }}</span>
+                </p>
+            </mat-list-item>
+            <mat-list-item (click)="editarCondPagamento()">
+                <h3 matLine>Condição de Pagamento</h3>
+                <p matLine>
+                    <span>Forma de Pagamento: </span>
+                    <span class="demo-2">{{ infoFaturamento.condicaoPagamento.formaPagamento }}</span>
+                </p>
+                <p matLine>
+                    <span>Prazo: </span>
+                    <span class="demo-2">{{ infoFaturamento.condicaoPagamento.prazo }}</span>
+                </p>
+            </mat-list-item>
+            <mat-list-item (click)="editarCondFaturamento()">
+                <h3 matLine>Condição de Faturamento</h3>
+                <p matLine>
+                    <span>Faturar através da </span>
+                    <span class="demo-2"><b>{{ infoFaturamento.condicaoFaturamento }}</b></span>
+                </p>
+            </mat-list-item>
+        </mat-nav-list>
+        <ng-template #selecioneOCliente>SELECIONE UM CLIENTE</ng-template>
+    </div>
+</div>

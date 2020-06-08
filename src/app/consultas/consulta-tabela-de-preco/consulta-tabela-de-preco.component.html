@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-header">Consulta Tabelas de Preços</div>
+    <div class="card-body">
+        <form [formGroup]="formService.formTabela">
+            <mat-form-field>
+                <mat-label>Selecione a tabela que deseja consultar</mat-label>
+                <mat-select 
+                    formControlName="nomeTabela">
+                    <mat-option 
+                        *ngFor="let tab of tabelasDePreco$ | async"
+                        [value]="tab">
+                            {{ tab.nomeTabela }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+        <hr>
+        <div *ngIf="tabelaSelecionada">
+            <h3>Nome da Tabela: <b>{{ tabelaSelecionada.nomeTabela }}</b></h3>
+            <h4>Última Modificação: <b>{{ tabelaSelecionada.ultimaModificacao }}</b></h4>
+            <mat-list>
+                <mat-list-item  *ngFor="let pecaTabela of tabelaSelecionada.pecas" class="list-item">
+                    <mat-label class="nome-peca">{{ pecaTabela.nomePeca }}</mat-label>
+                    <mat-label class="preco-peca">{{ pecaTabela.precoPeca | real }}</mat-label>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+</div>

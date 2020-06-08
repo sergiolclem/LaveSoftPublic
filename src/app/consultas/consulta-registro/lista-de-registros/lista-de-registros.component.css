@@ -1,0 +1,23 @@
+.cabecalho-lista{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(245,245,245 ,1);
+}
+.card-body{
+    padding: 0 1.25em;
+    max-height: 650px;
+    overflow-y: scroll;
+}
+.row{
+    width: 100%;
+}
+.tipo-registro{
+    text-transform: capitalize;
+}
+.spinner-lista{
+    margin: 30px;
+}
+.sem-registros{
+    margin: 30px auto;
+}

@@ -1,0 +1,13 @@
+.spinner-tabela{
+    display: flex;
+    justify-content: flex-start;
+}
+.tabela{
+    width: 50%;
+}
+.forma{
+    width: 50%;
+}
+.prazo{
+    width: 50%;
+}

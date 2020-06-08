@@ -1,0 +1,47 @@
+<div class="card">
+    <div class="card-header">CADASTRO DE TABELA DE PREÇO</div>
+    <div class="card-body">
+        <div class="row">
+            <!-- PRIMEIRA COLUNA - INPUTS -->
+            <div class="col-6">
+                <app-loading-spinner *ngIf="!formPronto"></app-loading-spinner>
+                <form *ngIf="formPronto" [formGroup]="cadTabForm">
+
+                    <mat-form-field class="nome-tabela">
+                        <mat-label>Nome da Tabela</mat-label>
+                        <input matInput formControlName="nomeTabela" autocomplete="off">
+                    </mat-form-field>
+
+                    <div class="card-body" formArrayName="pecas">
+                        <mat-list>
+                            <mat-list-item *ngFor="let peca of pecasArray.controls; let i=index">
+                                <mat-form-field class="peca-tabela">
+                                    <mat-label>{{ pecas[i].nome }}</mat-label>
+                                    <input appReal matInput [formControl]="peca" autocomplete="off">
+                                </mat-form-field>
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                </form>
+            </div>
+            <!-- SEGUNDA COLUNA - TABELA PADRÃO -->
+            <div class="col-6" *ngIf="tabelaPadrao | async as tab">
+                <div class="titulo-padrao">{{ tab.nomeTabela }}</div>
+                <mat-list class="lista-padrao">
+                    <mat-list-item *ngFor="let peca of tab.pecas" class="list-item-padrao">
+                        <div class="peca-tab-padrao">
+                            <p>{{ peca.nomePeca }}</p>
+                            <p>{{ peca.precoPeca | real }}</p>
+                        </div>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </div>
+        <div class="botoes" *ngIf="formPronto">
+            <button mat-raised-button 
+                [disabled]="cadTabForm.invalid"
+                (click)="cadastrarTabela()" 
+                class="botao-cadastrar">Cadastrar</button>
+        </div>
+    </div>
+</div>

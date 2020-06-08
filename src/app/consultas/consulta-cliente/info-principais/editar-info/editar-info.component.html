@@ -1,0 +1,36 @@
+<ng-container *ngIf="cliente; else selecioneUmCliente">
+    <h2 mat-dialog-title>{{ cliente.infoPrincipais.nome }} - editar/adicionar informações</h2>
+
+    <form [formGroup]="infoForm.formInformPrinc">        
+        <mat-form-field class="form">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome" autocomplete="off">
+        </mat-form-field><br>
+        <mat-form-field class="form">
+            <mat-label>Categoria</mat-label>
+            <input matInput formControlName="categoria" autocomplete="off">
+        </mat-form-field><br>
+        <mat-form-field class="form">
+            <mat-label>Cidade</mat-label>
+            <input matInput formControlName="cidade" autocomplete="off">
+        </mat-form-field><br>
+        <mat-form-field class="form">
+            <mat-label>Endereço</mat-label>
+            <input matInput formControlName="endereco" autocomplete="off">
+        </mat-form-field><br>
+        <mat-form-field class="form">
+            <mat-label>CPF/CNPJ</mat-label>
+            <input matInput formControlName="cpfOuCnpj" autocomplete="off">
+        </mat-form-field><br>
+        <mat-form-field class="form">
+            <mat-label>Observações</mat-label>
+            <textarea matInput formControlName="observacoes" autocomplete="off"></textarea>
+        </mat-form-field>
+    </form>
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancelar</button>
+        <button mat-button mat-dialog-close (click)="atualizarCliente(cliente)">Salvar</button>
+    </mat-dialog-actions>
+</ng-container>
+<ng-template #selecioneUmCliente>SELECIONE UM CLIENTE</ng-template>

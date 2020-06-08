@@ -1,0 +1,16 @@
+.chave{
+    width: 30%;
+}
+.valor{
+    width: 70%;
+    text-transform: capitalize;
+}
+.cabecalho-flex{
+    display: flex;
+}
+.example-spacer {
+    flex: 1 1 auto;
+}
+.edit-icon{
+    cursor: pointer;
+}

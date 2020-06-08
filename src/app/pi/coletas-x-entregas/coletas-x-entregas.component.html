@@ -1,0 +1,18 @@
+<app-filtro-peca-cliente-data></app-filtro-peca-cliente-data>
+<div class="card mt-2">
+  <div class="card-body">
+    <div style="display: block" *ngIf="graficoPronto && contemPeca; else semFiltro">
+      <canvas baseChart
+        [datasets]="series"
+        [labels]="rotulos"
+        [options]="opcoesGrafico"
+        [legend]="legendasGrafico"
+        [chartType]="tipoGrafico">
+      </canvas>
+    </div>
+    <ng-template #semFiltro>
+      <span *ngIf="contemPeca">Antes de prosseguir, você deve selecionar uma peça!</span>
+      <span *ngIf="!contemPeca">Não há registros para a peça selecionada!</span>
+    </ng-template>
+  </div>
+</div>

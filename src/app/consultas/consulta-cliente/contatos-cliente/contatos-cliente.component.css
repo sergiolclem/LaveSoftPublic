@@ -1,0 +1,9 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+.cabecalho-flex{
+    display: flex;
+}
+.edit-icon{
+    cursor: pointer;
+}

@@ -1,0 +1,69 @@
+<h2 mat-dialog-title>{{ cliente.infoPrincipais.nome }} - Faturar Ordens</h2>
+<mat-dialog-content>
+    <form [formGroup]="formAuxService.formAuxFat">
+        <div class="row">
+            <div class="col-4">
+                <mat-form-field>
+                    <mat-label>Nome do Cliente</mat-label>
+                    <input matInput formControlName="nomeCliente" autocomplete="off">
+                </mat-form-field><br>
+                <mat-form-field>
+                    <mat-label>CPF ou CNPJ</mat-label>
+                    <input matInput appCpfOuCnpj formControlName="cpfOuCnpj" autocomplete="off">
+                    <mat-error *ngIf="formAuxService.formAuxFat.get('cpfOuCnpj').hasError('cpfOuCnpjInvalido')">
+                        CPF ou CNPJ digitado não é válido
+                    </mat-error>
+                    <mat-error *ngIf="formAuxService.formAuxFat.get('cpfOuCnpj').hasError('cpfInvalido')">
+                        CPF digitado não é válido
+                    </mat-error>
+                    <mat-error *ngIf="formAuxService.formAuxFat.get('cpfOuCnpj').hasError('cnpjInvalido')">
+                        CNPJ digitado não é válido
+                    </mat-error>
+                </mat-form-field><br>
+                <mat-form-field>
+                    <mat-label>Telefone</mat-label>
+                    <input matInput appTelefone placeholder="DD X XXXX XXXX" formControlName="telefone"
+                        autocomplete="off">
+                    <mat-error>
+                        Número de telefone inválido
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-8">
+                <div>
+                    <h4>Referência: de {{ dataInicial | timestampToDate }} à {{ dataFinal | timestampToDate }} </h4>
+                    <h4>Valor Total: {{ valorTotal | real }}</h4>
+                </div>
+                <hr>
+                <div formArrayName="parcelas">
+                    <div *ngFor="let parcela of formAuxService.parcelasForm.controls; let i=index" [formGroupName]="i">
+                        <mat-form-field class="mr-2">
+                            <mat-label>Valor da Parcela</mat-label>
+                            <input matInput formControlName="valor">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Vencimento</mat-label>
+                            <input matInput [matDatepicker]="vencimento" formControlName="vencimento" [min]="minDate"
+                                autocomplete="off">
+                            <mat-datepicker-toggle matSuffix [for]="vencimento"></mat-datepicker-toggle>
+                            <mat-datepicker #vencimento></mat-datepicker>
+                        </mat-form-field><br>
+                        <button mat-button color="primary" [hidden]="formAuxService.parcelasForm.length === 4"
+                            (click)="formAuxService.novaParcela()">
+                            <mat-icon>add</mat-icon>Add Parcela
+                        </button>
+                        <button mat-button color="warn" [hidden]="formAuxService.parcelasForm.length === 1"
+                            (click)="formAuxService.removerParcela(i)">
+                            <mat-icon>clear</mat-icon>Remover
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial>Fechar</button>
+    <button mat-button mat-dialog-close (click)="criarFatura()"
+        [disabled]="formAuxService.formAuxFat.invalid">Faturar</button>
+</mat-dialog-actions>

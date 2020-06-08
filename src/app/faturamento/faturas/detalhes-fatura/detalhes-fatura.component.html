@@ -1,0 +1,109 @@
+<div class="detalhes-fatura">
+    <h2 mat-dialog-title>Fatura número: {{ fatura.metaDados.numeroFatura }}</h2>
+    <app-loading-spinner *ngIf="spinner" class="spinner"></app-loading-spinner>
+    <div>
+        <button mat-icon-button class="more-button" (click)="marcarStatusPara(false)"
+            [hidden]="!showBtns || !fatura.foiPaga" matTooltipHideDelay="1000"
+            matTooltip="Marcar como não paga" matTooltipPosition="below">
+            <mat-icon class="more-button-icon">cancel_presentation</mat-icon>
+        </button>
+        <button mat-icon-button class="more-button" (click)="marcarStatusPara(true)"
+            [hidden]="!showBtns || fatura.foiPaga" matTooltipHideDelay="1000"
+            matTooltip="Marcar como paga" matTooltipPosition="below">
+            <mat-icon class="more-button-icon">done_all</mat-icon>
+        </button>
+        <button mat-icon-button class="more-button" (click)="deletarFatura()" 
+            color="warn" [hidden]="!showBtns" 
+            matTooltipHideDelay="1000" matTooltip="Deletar Fatura" matTooltipPosition="below">
+            <mat-icon class="more-button-icon">delete</mat-icon>
+        </button>
+        <button mat-icon-button class="more-vert-button" (click)="toggleDelete()">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    </div>
+</div>
+<mat-dialog-content>
+    <mat-list>
+        <h3>Cliente: {{ fatura.infoCliente.nome }}</h3>
+        <mat-list-item>
+            <p matLine>
+                <span>Referência: </span>
+                <span class="demo-2">{{ fatura.referencia.data }}</span>
+            </p>
+            <p matLine>
+                <span>Usuário: </span>
+                <span class="demo-2">{{ fatura.metaDados.usuario }}</span>
+            </p>
+            <p matLine>
+                Data de Processamento: {{ fatura.metaDados.dataProcessamento | timestampToDate }}
+            </p>
+        </mat-list-item>
+    </mat-list>
+    <hr>
+    <h3>Parcelas</h3>
+    <mat-table [dataSource]="parcelas" class="mat-elevation-z8 tabela">
+
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+            <mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</mat-cell>
+            <mat-footer-cell *matFooterCellDef>Total</mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cobrancaGerada">
+            <mat-header-cell *matHeaderCellDef>Cobrança</mat-header-cell>
+            <mat-cell *matCellDef="let element; let i=index">
+                <button mat-button *ngIf="element.cobrancaGerada; else semCobranca" 
+                    class="gerar-boleto-btn" (click)="navegar(i)">Ver
+                    Boleto</button>
+                <ng-template #semCobranca>
+                    <button mat-button (click)="gerarBoleto(element, i)" class="gerar-boleto-btn">Gerar Boleto</button>
+                </ng-template>
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="valor">
+            <mat-header-cell *matHeaderCellDef>Valor Total</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.valor | real }}</mat-cell>
+            <mat-footer-cell *matFooterCellDef>{{ valorParcela | real }}</mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="vencimento">
+            <mat-header-cell *matHeaderCellDef>Vencimento</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.vencimento | timestampToDate }}</mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cobrancaPaga">
+            <mat-header-cell *matHeaderCellDef>Cobrança Paga</mat-header-cell>
+            <mat-cell *matCellDef="let element; let i = index" class="cob-paga">
+                <mat-slide-toggle [checked]="element.cobrancaPaga" 
+                    [disabled]="spinner" (change)="marcarStatusPara($event.checked, i)">
+                </mat-slide-toggle>
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cobrancaVencida">
+            <mat-header-cell *matHeaderCellDef>Cobrança Vencida</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <span *ngIf="element.cobrancaVencida">Sim</span>
+                <span *ngIf="!element.cobrancaVencida">Não</span>
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="cabecalho"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: cabecalho"></mat-row>
+        <mat-footer-row *matFooterRowDef="cabecalho; sticky: true"></mat-footer-row>
+    </mat-table>
+    <div class="observacoes" *ngFor="let parc of fatura.parcelas; let i = index">
+        <mat-list *ngIf="parc.observacoes?.length">
+            <h3 matSubheader>Observações parcela: {{ i + 1 }}</h3>
+            <mat-list-item *ngFor="let obs of parc.observacoes" class="observacao">{{ obs }}</mat-list-item>
+        </mat-list>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial>Fechar</button>
+</mat-dialog-actions>

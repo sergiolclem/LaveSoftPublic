@@ -1,0 +1,15 @@
+.mat-radio-group{
+    flex-direction: column;
+    margin: 15px 0;
+}
+.mat-radio-button{
+    margin: 10px 25px;
+}
+.mat-form-field{
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+}
+.filtro-label{
+    width:70%;
+}

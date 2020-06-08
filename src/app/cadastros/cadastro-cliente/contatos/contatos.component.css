@@ -1,0 +1,10 @@
+.nome-cargo{
+    display: flex;
+    justify-content: space-between;
+}
+.nome{
+    width: 60%;
+}
+.email{
+    width: 50%;
+}

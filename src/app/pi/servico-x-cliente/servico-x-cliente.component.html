@@ -1,0 +1,32 @@
+<app-filtro-cliente-data></app-filtro-cliente-data>
+
+<div class="card tabela-container mt-2">
+    <div class="card-body" *ngIf="!linhasCarregadas">
+        <app-loading-spinner></app-loading-spinner>
+    </div>
+    <mat-table [dataSource]="linhasTabela" class="mat-elevation-z8 tabela" *ngIf="linhasCarregadas">
+
+        <ng-container matColumnDef="peca" sticky>
+            <mat-header-cell *matHeaderCellDef>Peça</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ valorColuna(element, 'peca') }}</mat-cell>
+        </ng-container>
+
+        <ng-container *ngFor="let coluna of rotulosTabela">
+            <ng-container *ngIf="coluna != 'peca' && coluna!='total'" [matColumnDef]="coluna">
+                <mat-header-cell *matHeaderCellDef class="colunas-genericas">{{ coluna  }}</mat-header-cell>
+                <mat-cell *matCellDef="let element" class="colunas-genericas" text-center>
+                    <span *ngIf="valorColuna(element, coluna); else zero">{{ valorColuna(element, coluna) }}</span>
+                    <ng-template #zero>-</ng-template>
+                </mat-cell>
+            </ng-container>
+        </ng-container>
+
+        <ng-container matColumnDef="total" stickyEnd>
+            <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+            <mat-cell *matCellDef="let element" text-center>{{ valorColuna(element, 'total') }}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="rotulosTabela"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: rotulosTabela"></mat-row>
+    </mat-table>
+</div>
