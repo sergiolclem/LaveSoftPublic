@@ -4,7 +4,7 @@
 
 ### Tecnologias utilizadas
 
-O projeto foi desenvolvido utilizando o framework [Angular](https://angular.io/) e conta com um segundo módulo mobile, desenvolvido em [Ionic](https://ionicframework.com/) para a contrução do front-end. 
+Front-end do projeto desenvolvido em [Angular](https://angular.io/).
 
 O back-end é desenvolvido explorando o conceito de serverless computing, usando assim os serviços Google Cloud; em específico [Cloud Firestore](https://firebase.google.com/docs/firestore) e [Cloud Functions](https://firebase.google.com/docs/functions). Ainda sobre o back-end, o framework utilizado foi Express.js.
 
@@ -16,6 +16,8 @@ Outras características:
 - A biblioteca utilizada para renderizar os gráficos foi [Chart.js](https://www.chartjs.org/);
 - A biblioteca utilizada para gerar documentos pdf foi [jsPDF](https://parall.ax/products/jspdf);
 - Integração com o API da instituição de pagamentos [Gerencianet](https://gerencianet.com.br/);
+
+**IMPORTANTE:** A solução é composta deste módulo web, usado para análise de dados do processo e faturamento; e outro módulo mobile, usado para registrar as ordens de serviço no sistema. Este segundo módulo foi desenvolvido utilizando as mesmas tecnologias de back-end, porém utiliza o framework [Ionic](https://ionicframework.com/).
 
 ### Objetivo do Projeto
 
